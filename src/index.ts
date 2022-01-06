@@ -1,4 +1,4 @@
-const unicorn = require('eslint-plugin-unicorn');
+import * as unicorn from 'eslint-plugin-unicorn';
 
 module.exports = {
     rules: unicorn.rules,
@@ -9,6 +9,7 @@ module.exports = {
                 "plugin:unicorn/recommended",
                 "plugin:sonarjs/recommended",
                 "eslint:recommended",
+                "plugin:prettier/recommended"
             ],
             plugins: [
                 "unicorn",
