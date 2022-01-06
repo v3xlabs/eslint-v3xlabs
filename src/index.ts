@@ -50,6 +50,10 @@ module.exports = {
                         "prev": ["const", "let"],
                         "next": ["const", "let"]
                     }
+                ],
+                "object-curly-spacing": [
+                    "error",
+                    "always"
                 ]
             }
         }
