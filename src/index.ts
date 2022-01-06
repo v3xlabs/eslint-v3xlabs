@@ -56,6 +56,7 @@ module.exports = {
                         checkAllIndexAccess: true,
                     },
                 ],
+                'unicorn/no-array-callback-reference': 'off',
             },
         },
     },
