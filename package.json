@@ -1,0 +1,21 @@
+{
+  "name": "eslint-plugin-lvksh",
+  "main": "lib/index.js",
+  "repository": "https://github.com/lvkdotsh/javascript",
+  "author": "Lucemans <luc@lucemans.nl>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^17.0.8",
+    "typescript": "^4.5.4"
+  },
+  "dependencies": {
+    "eslint-plugin-jest": "^25.3.4",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "eslint-plugin-sonarjs": "^0.11.0",
+    "eslint-plugin-unicorn": "^40.0.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "pub": "yarn build && yarn publish --access public"
+  }
+}
