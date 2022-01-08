@@ -57,7 +57,9 @@ module.exports = {
                     },
                 ],
                 'unicorn/no-array-callback-reference': 'off',
-                'unicorn/prefer-module': 'off'
+                'unicorn/prefer-module': 'off',
+                'no-nested-ternary': 'off',
+                'no-unneeded-ternary': 'warn'
             },
         },
     },
