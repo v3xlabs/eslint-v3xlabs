@@ -12,3 +12,8 @@ jobs:
       - run: yarn
       - name: Build
         run: yarn build
+      - run: yarn
+        working-directory: ./create
+      - name: Build
+        run: yarn build
+        working-directory: ./create

@@ -1,29 +1,29 @@
 {
-  "name": "eslint-plugin-lvksh",
-  "main": "lib/index.js",
-  "repository": "https://github.com/lvkdotsh/javascript",
-  "author": "Lucemans <luc@lucemans.nl>",
-  "license": "MIT",
-  "devDependencies": {
-    "@types/node": "^17.0.8",
-    "eslint": "^8.6.0",
-    "eslint-plugin-lvksh": "^1.1.0",
-    "typescript": "^4.5.4"
-  },
-  "dependencies": {
-    "@typescript-eslint/parser": "^5.9.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-jest": "^25.3.4",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-simple-import-sort": "^7.0.0",
-    "eslint-plugin-sonarjs": "^0.11.0",
-    "eslint-plugin-unicorn": "^40.0.0",
-    "prettier": "^2.5.1"
-  },
-  "scripts": {
-    "build": "tsc",
-    "pub": "yarn build && yarn publish --access public",
-    "lint": "eslint -c .eslintrc.json --ext .ts ./src"
-  },
-  "version": "0.0.1"
+    "name": "eslint-plugin-lvksh",
+    "main": "lib/index.js",
+    "repository": "https://github.com/lvkdotsh/javascript",
+    "author": "Lucemans <luc@lucemans.nl>",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/node": "^17.0.8",
+        "eslint": "^8.7.0",
+        "eslint-plugin-lvksh": "^1.2.3",
+        "typescript": "^4.5.4"
+    },
+    "dependencies": {
+        "@typescript-eslint/parser": "^5.9.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-jest": "^25.3.4",
+        "eslint-plugin-prettier": "^4.0.0",
+        "eslint-plugin-simple-import-sort": "^7.0.0",
+        "eslint-plugin-sonarjs": "^0.11.0",
+        "eslint-plugin-unicorn": "^40.0.0",
+        "prettier": "^2.5.1"
+    },
+    "scripts": {
+        "build": "tsc",
+        "pub": "yarn build && yarn publish --access public",
+        "lint": "eslint -c .eslintrc.json --ext .ts ./src"
+    },
+    "version": "0.0.1"
 }

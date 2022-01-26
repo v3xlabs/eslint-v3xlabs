@@ -19,3 +19,15 @@ jobs:
       - run: yarn pub
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: yarn
+        working-directory: ./create
+      - name: Build
+        run: yarn build
+        working-directory: ./create
+      - name: Version
+        run: yarn version --new-version "${GITHUB_REF:11}" --no-git-tag-version
+        working-directory: ./create
+      - run: yarn pub
+        working-directory: ./create
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

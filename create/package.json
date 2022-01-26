@@ -1,0 +1,26 @@
+{
+    "name": "create-eslint-lvksh",
+    "repository": "https://github.com/lvkdotsh/javascript",
+    "version": "1.0.0",
+    "main": "./lib/index.js",
+    "license": "MIT",
+    "bin": {
+        "create-eslint-lvksh": "./index.js"
+    },
+    "files": ["index.js", "src", "lib"],
+    "scripts": {
+        "build": "tsc",
+        "pub": "yarn build && yarn publish --access public",
+        "lint": "eslint -c ../.eslintrc.json --ext .ts ./src"
+    },
+    "devDependencies": {
+        "eslint": "^8.7.0",
+        "eslint-plugin-lvksh": "^1.2.3",
+        "ts-node": "^10.4.0",
+        "typescript": "^4.5.5"
+    },
+    "dependencies": {
+        "@lvksh/logger": "^1.5.2",
+        "chalk": "4.0.0"
+    }
+}
