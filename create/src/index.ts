@@ -147,12 +147,12 @@ const setupPackageJSON = async (path: string) => {
 };
 
 (async () => {
-    log.empty(chalk.yellowBright('-'.repeat(40)));
+    log.empty('', '');
 
-    log['⭐'](
-        chalk.magenta`eslint-plugin-lvksh` + ' installer',
-        '',
-        'Authored by @lvksh',
+    log['⭐'](chalk.magenta`eslint-plugin-lvksh` + ' installer');
+    log.empty(chalk.yellowBright('-'.repeat(40)));
+    log.empty(
+        'Authored by ' + chalk.gray`@lvksh`,
         'github.com/lvksh/javascript',
         ''
     );
@@ -199,11 +199,12 @@ const setupPackageJSON = async (path: string) => {
 
     await setupESLintRC();
     await setupPrettier();
-    log.empty(chalk.yellowBright('-'.repeat(40)));
     await setupPackageJSON(packageJSONLocation);
 
     log.empty('');
+    log.empty(chalk.yellowBright('-'.repeat(40)));
+    log.empty('');
     log['🚀'](chalk.cyan`Off to the races!`);
 
-    log.empty('', '', '');
+    log.empty('', '');
 })();

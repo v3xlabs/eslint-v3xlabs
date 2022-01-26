@@ -94,8 +94,10 @@ const setupPackageJSON = (path) => __awaiter(void 0, void 0, void 0, function* (
     yield (0, promises_1.writeFile)(path, JSON.stringify(updatedPackageData, undefined, 4));
 });
 (() => __awaiter(void 0, void 0, void 0, function* () {
+    log.empty('', '');
+    log['⭐'](chalk_1.default.magenta `eslint-plugin-lvksh` + ' installer');
     log.empty(chalk_1.default.yellowBright('-'.repeat(40)));
-    log['⭐'](chalk_1.default.magenta `eslint-plugin-lvksh` + ' installer', '', 'Authored by @lvksh', 'github.com/lvksh/javascript', '');
+    log.empty('Authored by ' + chalk_1.default.gray `@lvksh`, 'github.com/lvksh/javascript', '');
     yield new Promise((reply) => setTimeout(reply, 1000));
     log['🌿']('Relaxing....');
     log.empty(chalk_1.default.yellowBright('-'.repeat(40)));
@@ -124,9 +126,10 @@ const setupPackageJSON = (path) => __awaiter(void 0, void 0, void 0, function* (
     log.empty(chalk_1.default.yellowBright('-'.repeat(40)));
     yield setupESLintRC();
     yield setupPrettier();
-    log.empty(chalk_1.default.yellowBright('-'.repeat(40)));
     yield setupPackageJSON(packageJSONLocation);
     log.empty('');
+    log.empty(chalk_1.default.yellowBright('-'.repeat(40)));
+    log.empty('');
     log['🚀'](chalk_1.default.cyan `Off to the races!`);
-    log.empty('', '', '');
+    log.empty('', '');
 }))();
