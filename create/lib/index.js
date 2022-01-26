@@ -58,11 +58,13 @@ const setupESLintRC = () => __awaiter(void 0, void 0, void 0, function* () {
     else {
         log.empty('Generating ' + chalk_1.default.gray `.eslintrc.json`);
     }
-    const BestData = Object.assign(Object.assign({}, mock), { parser: '@typescript-eslint/parser', parserOptions: { ecmaVersion: 2021 }, extends: [
+    const updatedLint = Object.assign(Object.assign({}, mock), { parser: '@typescript-eslint/parser', parserOptions: { ecmaVersion: 2021 }, extends: [
             ...new Set([...(mock.extends || []), 'plugin:lvksh/recommended']),
-        ] });
+        ], ignorePatterns: ['!**/*'], plugins: [...new Set([...(mock.plugins || []), 'lvksh'])], env: {
+            node: true,
+        }, rules: Object.assign({}, (mock.rules || [])) });
     // Write the updated/new file to disk
-    yield (0, promises_1.writeFile)('.eslintrc.json', JSON.stringify(BestData, undefined, 4));
+    yield (0, promises_1.writeFile)('.eslintrc.json', JSON.stringify(updatedLint, undefined, 4));
 });
 const setupPrettier = () => __awaiter(void 0, void 0, void 0, function* () {
     let mock = {};
@@ -113,7 +115,12 @@ const setupPackageJSON = (path) => __awaiter(void 0, void 0, void 0, function* (
     log.empty('');
     log['🔧']('Building...');
     log.empty(chalk_1.default.yellowBright('-'.repeat(40)));
-    const packages = ['eslint', 'eslint-plugin-lvksh'];
+    const packages = [
+        'eslint',
+        'eslint-plugin-lvksh',
+        'typescript',
+        '@typescript-eslint/parser',
+    ];
     for (const packageToInstall of packages) {
         log.empty('Installing ' + chalk_1.default.gray(packageToInstall));
         yield new Promise((accept) => (0, node_child_process_1.exec)('yarn add -D ' + packageToInstall, (error, stdout, stderr) => {

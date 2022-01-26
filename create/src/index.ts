@@ -192,7 +192,12 @@ const setupPackageJSON = async (path: string) => {
     log['🔧']('Building...');
     log.empty(chalk.yellowBright('-'.repeat(40)));
 
-    const packages = ['eslint', 'eslint-plugin-lvksh'];
+    const packages = [
+        'eslint',
+        'eslint-plugin-lvksh',
+        'typescript',
+        '@typescript-eslint/parser',
+    ];
 
     for (const packageToInstall of packages) {
         log.empty('Installing ' + chalk.gray(packageToInstall));
