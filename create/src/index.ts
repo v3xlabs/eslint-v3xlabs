@@ -78,17 +78,28 @@ const setupESLintRC = async () => {
         log.empty('Generating ' + chalk.gray`.eslintrc.json`);
     }
 
-    const BestData: ESLintMock = {
+    const updatedLint: ESLintMock = {
         ...mock,
         parser: '@typescript-eslint/parser',
         parserOptions: { ecmaVersion: 2021 },
         extends: [
             ...new Set([...(mock.extends || []), 'plugin:lvksh/recommended']),
         ],
+        ignorePatterns: ['!**/*'],
+        plugins: [...new Set([...(mock.plugins || []), 'lvksh'])],
+        env: {
+            node: true,
+        },
+        rules: {
+            ...(mock.rules || []),
+        },
     };
 
     // Write the updated/new file to disk
-    await writeFile('.eslintrc.json', JSON.stringify(BestData, undefined, 4));
+    await writeFile(
+        '.eslintrc.json',
+        JSON.stringify(updatedLint, undefined, 4)
+    );
 };
 
 const setupPrettier = async () => {
