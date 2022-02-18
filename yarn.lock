@@ -345,10 +345,10 @@ eslint-plugin-jest@^25.3.4:
   dependencies:
     "@typescript-eslint/experimental-utils" "^5.0.0"
 
-eslint-plugin-lvksh@^1.2.5:
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-lvksh/-/eslint-plugin-lvksh-1.2.5.tgz#7565d8fb5a1d3f3848dbbc2e862236f3d1b751ac"
-  integrity sha512-Ep8T0fhxHQ6ptnpT/Oc4SWKW9WVve4yWzdJQhG0ccQTBJV7s+pF4Xe3dRw0ZelPV3uMfbOAnfXDeN6j77Pcdgw==
+eslint-plugin-lvksh@^1.2.8:
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-lvksh/-/eslint-plugin-lvksh-1.2.8.tgz#0def962c2ad689a3d4405adf808ffb454b58f23e"
+  integrity sha512-byY6QH/M93rDezDcJUt6w8lYmC7FYmm1v12TXT71eWcRJjiK4R7sslr4/qZ2dvb0bJ5DlqDa4Gbm6vF8T/JMqg==
   dependencies:
     "@typescript-eslint/parser" "^5.9.0"
     eslint-config-prettier "^8.3.0"
@@ -395,6 +395,18 @@ eslint-plugin-unicorn@^40.0.0:
     safe-regex "^2.1.1"
     semver "^7.3.5"
     strip-indent "^3.0.0"
+
+eslint-plugin-unused-imports@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-unused-imports/-/eslint-plugin-unused-imports-2.0.0.tgz#d8db8c4d0cfa0637a8b51ce3fd7d1b6bc3f08520"
+  integrity sha512-3APeS/tQlTrFa167ThtP0Zm0vctjr4M44HMpeg1P4bK6wItarumq0Ma82xorMKdFsWpphQBlRPzw/pxiVELX1A==
+  dependencies:
+    eslint-rule-composer "^0.3.0"
+
+eslint-rule-composer@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/eslint-rule-composer/-/eslint-rule-composer-0.3.0.tgz#79320c927b0c5c0d3d3d2b76c8b4a488f25bbaf9"
+  integrity sha512-bt+Sh8CtDmn2OajxvNO+BX7Wn4CIWMpTRm3MaiKPCQcnnlm0CS2mhui6QaoeQugs+3Kj2ESKEEGJUdVafwhiCg==
 
 eslint-scope@^5.1.1:
   version "5.1.1"
