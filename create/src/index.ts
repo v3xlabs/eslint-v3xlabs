@@ -1,9 +1,13 @@
 import { createLogger } from '@lvksh/logger';
 import chalk from 'chalk';
-import { exec } from 'node:child_process';
+import { exec, spawn } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { readFile, stat, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import { detect, getDefaultAgent, run, getCommand, Runner, runCli, parseNi } from '@antfu/ni';
+import prompts from 'prompts';
+
+const Agents = ["npm", "pnpm", "yarn", "yarn@berry"] as const;
 
 type ESLintMock = {
     parser?: string;
@@ -46,9 +50,7 @@ const noPackage = () => {
     log['💨'](chalk.redBright.bold`Oh no!`);
     log.empty(chalk.yellowBright('-'.repeat(40)));
     log.empty(
-        'It appears you are not in a project 🤷',
-        'Try ' + chalk.gray`yarn init` + ' or ' + chalk.gray`npm init`,
-        ''
+        'It appears you are not in a project 🤷'
     );
 };
 
@@ -132,9 +134,9 @@ const setupPackageJSON = async (path: string) => {
     if (!path || path.length === 0) {
         log.empty(
             chalk.yellow`Skipped` +
-                ' Setting up ' +
-                chalk.gray`lint` +
-                ' script.'
+            ' Setting up ' +
+            chalk.gray`lint` +
+            ' script.'
         );
 
         return;
@@ -173,6 +175,28 @@ const setupPackageJSON = async (path: string) => {
     log['🌿']('Relaxing....');
     log.empty(chalk.yellowBright('-'.repeat(40)));
 
+    // Detect package manager
+    let agent = await detect({ cwd: process.cwd() })
+    let global = agent || await getDefaultAgent();
+
+    if (!agent && global === 'prompt') {
+        global = (await prompts({
+            name: 'agent',
+            type: 'select',
+            message: 'Choose the agent',
+            choices: Agents.filter(i => !i.includes('@')).map(value => ({ title: value, value })),
+        })).agent
+        if (!global)
+            return
+    } else {
+        if (agent) {
+            log.empty('Using project agent ' + chalk.gray(agent));
+        } else {
+            log.empty('Using default agent ' + chalk.gray(global));
+        }
+    }
+
+    // Ensure package.json
     log.empty('Analyzing ' + chalk.gray`project settings`);
     const packageJSONLocation = await findPackageJson(process.cwd());
 
@@ -184,13 +208,35 @@ const setupPackageJSON = async (path: string) => {
 
     if (!packageJSONLocation) {
         noPackage();
-
-        return;
+        const shouldInit = (await prompts({
+            name: 'init',
+            type: 'confirm',
+            message: 'Would you like to initialize one?'
+        })).init;
+        if (shouldInit) {
+            log.empty('Launching ' + global + ' to initialize project');
+            log.empty('');
+            await new Promise<void>((accept, reject) => {
+                const shell = spawn(global, ['init'], {stdio: 'inherit'});
+                shell.on('error', (e) => {
+                    console.log(e);
+                });
+                shell.on('close', (code) => {
+                    accept();
+                });
+            });
+        } else {
+            log.empty('Exiting create-eslint-lvksh');
+            return;
+        }
     }
 
+    // Install dependencies
     log.empty('');
     log['🔧']('Building...');
     log.empty(chalk.yellowBright('-'.repeat(40)));
+
+    log.empty('Switching to ' + chalk.gray(global));
 
     const packages = [
         'eslint',
@@ -202,8 +248,7 @@ const setupPackageJSON = async (path: string) => {
     for (const packageToInstall of packages) {
         log.empty('Installing ' + chalk.gray(packageToInstall));
         await new Promise<boolean>((accept) =>
-            exec('yarn add -D ' + packageToInstall, (error, stdout, stderr) => {
-                // log.empty(stdout, stderr);
+            exec(getCommand(global as typeof Agents[number], 'install', ['-D', packageToInstall]), (error, stdout, stderr) => {
                 accept(true);
             })
         );

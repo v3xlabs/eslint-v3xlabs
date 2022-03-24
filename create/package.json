@@ -7,20 +7,28 @@
     "bin": {
         "create-eslint-lvksh": "./index.js"
     },
-    "files": ["index.js", "src", "lib"],
+    "files": [
+        "index.js",
+        "src",
+        "lib"
+    ],
     "scripts": {
         "build": "tsc",
         "pub": "yarn build && yarn publish --access public",
         "lint": "eslint -c ../.eslintrc.json --ext .ts ./src"
     },
     "devDependencies": {
+        "@types/node": "^17.0.23",
+        "@types/prompts": "^2.0.14",
         "eslint": "^8.7.0",
         "eslint-plugin-lvksh": "^1.2.3",
         "ts-node": "^10.4.0",
         "typescript": "^4.5.5"
     },
     "dependencies": {
+        "@antfu/ni": "^0.13.2",
         "@lvksh/logger": "^1.5.2",
-        "chalk": "4.0.0"
+        "chalk": "4.0.0",
+        "prompts": "^2.4.2"
     }
 }
