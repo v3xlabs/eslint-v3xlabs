@@ -12,15 +12,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const ni_1 = require("@antfu/ni");
 const logger_1 = require("@lvksh/logger");
 const chalk_1 = __importDefault(require("chalk"));
 const node_child_process_1 = require("node:child_process");
 const node_fs_1 = require("node:fs");
 const promises_1 = require("node:fs/promises");
 const node_path_1 = require("node:path");
-const ni_1 = require("@antfu/ni");
 const prompts_1 = __importDefault(require("prompts"));
-const Agents = ["npm", "pnpm", "yarn", "yarn@berry"];
+const Agents = ['npm', 'pnpm', 'yarn', 'yarn@berry'];
 const log = (0, logger_1.createLogger)({
     '🚀': '🚀',
     '⚙️': '⚙️ ',
@@ -107,14 +107,14 @@ const setupPackageJSON = (path) => __awaiter(void 0, void 0, void 0, function* (
     log['🌿']('Relaxing....');
     log.empty(chalk_1.default.yellowBright('-'.repeat(40)));
     // Detect package manager
-    let agent = yield (0, ni_1.detect)({ cwd: process.cwd() });
+    const agent = yield (0, ni_1.detect)({ cwd: process.cwd() });
     let global = agent || (yield (0, ni_1.getDefaultAgent)());
     if (!agent && global === 'prompt') {
         global = (yield (0, prompts_1.default)({
             name: 'agent',
             type: 'select',
             message: 'Choose the agent',
-            choices: Agents.filter(i => !i.includes('@')).map(value => ({ title: value, value })),
+            choices: Agents.filter((index) => !index.includes('@')).map((value) => ({ title: value, value })),
         })).agent;
         if (!global)
             return;
@@ -138,7 +138,7 @@ const setupPackageJSON = (path) => __awaiter(void 0, void 0, void 0, function* (
         const shouldInit = (yield (0, prompts_1.default)({
             name: 'init',
             type: 'confirm',
-            message: 'Would you like to initialize one?'
+            message: 'Would you like to initialize one?',
         })).init;
         if (shouldInit) {
             log.empty('Launching ' + global + ' to initialize project');
@@ -171,9 +171,17 @@ const setupPackageJSON = (path) => __awaiter(void 0, void 0, void 0, function* (
     ];
     for (const packageToInstall of packages) {
         log.empty('Installing ' + chalk_1.default.gray(packageToInstall));
-        yield new Promise((accept) => (0, node_child_process_1.exec)((0, ni_1.getCommand)(global, 'install', ['-D', packageToInstall]), (error, stdout, stderr) => {
-            accept(true);
-        }));
+        yield new Promise((accept) => {
+            const cmd = (0, ni_1.getCommand)(global, 'install') + ' -D ' + packageToInstall;
+            (0, node_child_process_1.exec)(cmd, (error, stdout, stderr) => {
+                if (error) {
+                    log.empty(error);
+                    log.empty(stderr);
+                    log.empty(stdout);
+                }
+                accept(true);
+            });
+        });
     }
     log.empty();
     log['⚙️']('Configuring...');

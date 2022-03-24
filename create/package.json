@@ -1,7 +1,7 @@
 {
     "name": "create-eslint-lvksh",
     "repository": "https://github.com/lvkdotsh/javascript",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "main": "./lib/index.js",
     "license": "MIT",
     "bin": {
@@ -20,7 +20,7 @@
     "devDependencies": {
         "@types/node": "^17.0.23",
         "@types/prompts": "^2.0.14",
-        "eslint": "^8.7.0",
+        "eslint": "^8.11.0",
         "eslint-plugin-lvksh": "^1.2.3",
         "ts-node": "^10.4.0",
         "typescript": "^4.5.5"
