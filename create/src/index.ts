@@ -263,7 +263,10 @@ const setupPackageJSON = async (path: string) => {
     for (const packageToInstall of packages) {
         log.empty('Installing ' + chalk.gray(packageToInstall));
         await new Promise<boolean>((accept) => {
-            const cmd = getCommand(global as typeof Agents[number], 'install') + ' -D ' + packageToInstall;
+            const cmd =
+                getCommand(global as typeof Agents[number], 'add') +
+                ' -D ' +
+                packageToInstall;
 
             exec(cmd, (error, stdout, stderr) => {
                 if (error) {
@@ -271,6 +274,7 @@ const setupPackageJSON = async (path: string) => {
                     log.empty(stderr);
                     log.empty(stdout);
                 }
+
                 accept(true);
             });
         });

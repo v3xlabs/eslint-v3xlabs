@@ -172,7 +172,9 @@ const setupPackageJSON = (path) => __awaiter(void 0, void 0, void 0, function* (
     for (const packageToInstall of packages) {
         log.empty('Installing ' + chalk_1.default.gray(packageToInstall));
         yield new Promise((accept) => {
-            const cmd = (0, ni_1.getCommand)(global, 'install') + ' -D ' + packageToInstall;
+            const cmd = (0, ni_1.getCommand)(global, 'add') +
+                ' -D ' +
+                packageToInstall;
             (0, node_child_process_1.exec)(cmd, (error, stdout, stderr) => {
                 if (error) {
                     log.empty(error);
