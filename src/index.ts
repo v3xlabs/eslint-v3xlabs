@@ -22,6 +22,7 @@ module.exports = {
             rules: {
                 ...unicorn.configs.recommended.rules,
                 quotes: ['error', 'single'],
+                avoidEscape: true,
                 semi: ['error', 'always'],
                 indent: 'off',
                 'linebreak-style': ['error', 'unix'],
