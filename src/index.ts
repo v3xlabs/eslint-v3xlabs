@@ -11,6 +11,7 @@ module.exports = {
                 'plugin:sonarjs/recommended',
                 'eslint:recommended',
                 'plugin:prettier/recommended',
+                'plugin:styled-components-a11y/recommended',
             ],
             plugins: [
                 'unicorn',
@@ -18,6 +19,8 @@ module.exports = {
                 'sonarjs',
                 'jest',
                 'unused-imports',
+                'prefer-arrow',
+                'jsx-a11y',
             ],
             rules: {
                 ...unicorn.configs.recommended.rules,
