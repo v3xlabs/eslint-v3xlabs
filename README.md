@@ -2,6 +2,31 @@
 
 The Official [lvkdotsh](https://github.com/lvkdotsh) javascript/typescript style-guide and linting rules.
 
+## Create command
+
+The lvkdotsh styleguide comes with a helpful `create` command that will help you setup your project with the style guide.
+
+The create utility tries to detect which nodejs package manager you are using but if it fails to do such it will prompt you to choose between `npm, pnpm and yarn`.
+
+If you have not setup a project yet in your working folder, it will provide you the option to initialize a new project. This creates a `package.json` file in your working folder and proceeds to install the style guide dependencies. (`eslint`, `eslint-plugin-lvksh`, `typescript`, `@typescript-eslint/parser`).
+
+When done you should also find a `.eslintrc.json` file and a `.prettierrc` file in your working folder following our style guide.
+
+### PNPM
+```sh
+pnpm create eslint-lvksh
+```
+
+### Yarn
+```sh
+yarn create eslint-lvksh
+```
+
+### NPM
+```sh
+npm create eslint-lvksh
+```
+
 ## Installation
 
 Using `npm`:
