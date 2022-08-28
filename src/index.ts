@@ -1,7 +1,7 @@
 import * as unicorn from 'eslint-plugin-unicorn';
 
 // eslint-disable-next-line unicorn/prefer-module
-module.exports = {
+export = {
     rules: unicorn.rules,
     configs: {
         recommended: {
