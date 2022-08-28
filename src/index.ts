@@ -59,12 +59,7 @@ module.exports = {
                 ],
                 'object-curly-spacing': ['error', 'always'],
                 'unicorn/filename-case': 'off',
-                'unicorn/prefer-at': [
-                    'error',
-                    {
-                        checkAllIndexAccess: true,
-                    },
-                ],
+                'unicorn/prefer-at': 'off',
                 'unicorn/no-array-callback-reference': 'off',
                 'unicorn/prefer-module': 'off',
                 'no-nested-ternary': 'off',
