@@ -80,6 +80,7 @@ module.exports = {
                         argsIgnorePattern: '^_',
                     },
                 ],
+                'unicorn/no-array-reduce': 'off',
             },
         },
     },
