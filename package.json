@@ -1,13 +1,13 @@
 {
-    "name": "eslint-plugin-lvksh",
+    "name": "eslint-plugin-v3xlabs",
     "main": "lib/index.js",
-    "repository": "https://github.com/lvkdotsh/javascript",
+    "repository": "https://github.com/v3xlabs/eslint-v3xlabs",
     "author": "Lucemans <luc@lucemans.nl>",
     "license": "MIT",
     "devDependencies": {
         "@types/node": "^17.0.18",
         "eslint": "^8.9.0",
-        "eslint-plugin-lvksh": "^1.2.8",
+        "eslint-plugin-v3xlabs": "^1.2.8",
         "typescript": "^4.5.5"
     },
     "dependencies": {

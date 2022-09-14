@@ -91,10 +91,10 @@ const setupESLintRC = async () => {
         parser: '@typescript-eslint/parser',
         parserOptions: { ecmaVersion: 2021 },
         extends: [
-            ...new Set([...(mock.extends || []), 'plugin:lvksh/recommended']),
+            ...new Set([...(mock.extends || []), 'plugin:v3xlabs/recommended']),
         ],
         ignorePatterns: ['!**/*'],
-        plugins: [...new Set([...(mock.plugins || []), 'lvksh'])],
+        plugins: [...new Set([...(mock.plugins || []), 'v3xlabs'])],
         env: {
             node: true,
         },
@@ -168,11 +168,11 @@ const setupPackageJSON = async (path: string) => {
 (async () => {
     log.empty('', '');
 
-    log['⭐'](chalk.magenta`eslint-plugin-lvksh` + ' installer');
+    log['⭐'](chalk.magenta`eslint-plugin-v3xlabs` + ' installer');
     log.empty(chalk.yellowBright('-'.repeat(40)));
     log.empty(
-        'Authored by ' + chalk.gray`@lvksh`,
-        'github.com/lvksh/javascript',
+        'Authored by ' + chalk.gray`@v3xlabs`,
+        'github.com/v3xlabs/eslint-v3xlabs',
         ''
     );
 
@@ -240,7 +240,7 @@ const setupPackageJSON = async (path: string) => {
                 });
             });
         } else {
-            log.empty('Exiting create-eslint-lvksh');
+            log.empty('Exiting create-eslint-v3xlabs');
 
             return;
         }
@@ -255,7 +255,7 @@ const setupPackageJSON = async (path: string) => {
 
     const packages = [
         'eslint',
-        'eslint-plugin-lvksh',
+        'eslint-plugin-v3xlabs',
         'typescript',
         '@typescript-eslint/parser',
     ];
