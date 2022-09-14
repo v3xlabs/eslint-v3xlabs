@@ -1,7 +1,7 @@
 import * as unicorn from 'eslint-plugin-unicorn';
 
 // eslint-disable-next-line unicorn/prefer-module
-module.exports = {
+export = {
     rules: unicorn.rules,
     configs: {
         recommended: {
@@ -59,12 +59,7 @@ module.exports = {
                 ],
                 'object-curly-spacing': ['error', 'always'],
                 'unicorn/filename-case': 'off',
-                'unicorn/prefer-at': [
-                    'error',
-                    {
-                        checkAllIndexAccess: true,
-                    },
-                ],
+                'unicorn/prefer-at': 'off',
                 'unicorn/no-array-callback-reference': 'off',
                 'unicorn/prefer-module': 'off',
                 'no-nested-ternary': 'off',
@@ -80,6 +75,7 @@ module.exports = {
                         argsIgnorePattern: '^_',
                     },
                 ],
+                'unicorn/no-array-reduce': 'off',
             },
         },
     },
