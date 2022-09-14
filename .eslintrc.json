@@ -3,9 +3,9 @@
     "parserOptions": {
         "ecmaVersion": 2021
     },
-    "extends": ["plugin:lvksh/recommended"],
+    "extends": ["plugin:v3xlabs/recommended"],
     "ignorePatterns": ["!**/*"],
-    "plugins": ["lvksh"],
+    "plugins": ["v3xlabs"],
     "env": {
         "node": true
     },
