@@ -29,6 +29,7 @@ export = {
                 indent: 'off',
                 'linebreak-style': ['error', 'unix'],
                 'unicorn/prefer-spread': 'off',
+                'unicorn/expiring-todo-comments': 'off',
                 'simple-import-sort/imports': 'error',
                 'simple-import-sort/exports': 'error',
                 'no-unused-vars': 'off',
