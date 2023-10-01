@@ -12,6 +12,11 @@ If you have not setup a project yet in your working folder, it will provide you 
 
 When done you should also find a `.eslintrc.json` file and a `.prettierrc` file in your working folder following our style guide.
 
+### Bun
+```sh
+bun create eslint-v3xlabs
+```
+
 ### PNPM
 ```sh
 pnpm create eslint-v3xlabs

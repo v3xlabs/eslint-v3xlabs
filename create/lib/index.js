@@ -20,7 +20,7 @@ const node_fs_1 = require("node:fs");
 const promises_1 = require("node:fs/promises");
 const node_path_1 = require("node:path");
 const prompts_1 = __importDefault(require("prompts"));
-const Agents = ['npm', 'pnpm', 'yarn', 'yarn@berry'];
+const Agents = ['npm', 'pnpm', 'yarn', 'bun', 'yarn@berry'];
 const log = (0, logger_1.createLogger)({
     '🚀': '🚀',
     '⚙️': '⚙️ ',
@@ -62,8 +62,8 @@ const setupESLintRC = () => __awaiter(void 0, void 0, void 0, function* () {
         log.empty('Generating ' + chalk_1.default.gray `.eslintrc.json`);
     }
     const updatedLint = Object.assign(Object.assign({}, mock), { parser: '@typescript-eslint/parser', parserOptions: { ecmaVersion: 2021 }, extends: [
-            ...new Set([...(mock.extends || []), 'plugin:lvksh/recommended']),
-        ], ignorePatterns: ['!**/*'], plugins: [...new Set([...(mock.plugins || []), 'lvksh'])], env: {
+            ...new Set([...(mock.extends || []), 'plugin:v3xlabs/recommended']),
+        ], ignorePatterns: ['!**/*'], plugins: [...new Set([...(mock.plugins || []), 'v3xlabs'])], env: {
             node: true,
         }, rules: Object.assign({}, (mock.rules || [])) });
     // Write the updated/new file to disk
@@ -100,9 +100,9 @@ const setupPackageJSON = (path) => __awaiter(void 0, void 0, void 0, function* (
 });
 (() => __awaiter(void 0, void 0, void 0, function* () {
     log.empty('', '');
-    log['⭐'](chalk_1.default.magenta `eslint-plugin-lvksh` + ' installer');
+    log['⭐'](chalk_1.default.magenta `eslint-plugin-v3xlabs` + ' installer');
     log.empty(chalk_1.default.yellowBright('-'.repeat(40)));
-    log.empty('Authored by ' + chalk_1.default.gray `@lvksh`, 'github.com/lvksh/javascript', '');
+    log.empty('Authored by ' + chalk_1.default.gray `@v3xlabs`, 'github.com/v3xlabs/eslint-v3xlabs', '');
     yield new Promise((reply) => setTimeout(reply, 1000));
     log['🌿']('Relaxing....');
     log.empty(chalk_1.default.yellowBright('-'.repeat(40)));
@@ -154,7 +154,7 @@ const setupPackageJSON = (path) => __awaiter(void 0, void 0, void 0, function* (
             });
         }
         else {
-            log.empty('Exiting create-eslint-lvksh');
+            log.empty('Exiting create-eslint-v3xlabs');
             return;
         }
     }
@@ -165,7 +165,7 @@ const setupPackageJSON = (path) => __awaiter(void 0, void 0, void 0, function* (
     log.empty('Switching to ' + chalk_1.default.gray(global));
     const packages = [
         'eslint',
-        'eslint-plugin-lvksh',
+        'eslint-plugin-v3xlabs',
         'typescript',
         '@typescript-eslint/parser',
     ];
