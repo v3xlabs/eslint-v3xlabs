@@ -1,12 +1,4 @@
-import {
-    detect,
-    getCommand,
-    getDefaultAgent,
-    parseNi,
-    run,
-    runCli,
-    Runner,
-} from '@antfu/ni';
+import { detect, getCommand, getDefaultAgent } from '@antfu/ni';
 import { createLogger } from '@lvksh/logger';
 import chalk from 'chalk';
 import { exec, spawn } from 'node:child_process';
@@ -15,7 +7,7 @@ import { readFile, stat, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import prompts from 'prompts';
 
-const Agents = ['npm', 'pnpm', 'yarn', 'yarn@berry'] as const;
+const Agents = ['npm', 'pnpm', 'yarn', 'bun', 'yarn@berry'] as const;
 
 type ESLintMock = {
     parser?: string;
