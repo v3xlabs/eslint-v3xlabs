@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/cognitive-complexity */
 import { detect, getCommand, getDefaultAgent } from '@antfu/ni';
 import { createLogger } from '@lvksh/logger';
 import chalk from 'chalk';
@@ -256,7 +257,7 @@ const setupPackageJSON = async (path: string) => {
         log.empty('Installing ' + chalk.gray(packageToInstall));
         await new Promise<boolean>((accept) => {
             const cmd =
-                getCommand(global as typeof Agents[number], 'add') +
+                getCommand(global as (typeof Agents)[number], 'add') +
                 ' -D ' +
                 packageToInstall;
 
