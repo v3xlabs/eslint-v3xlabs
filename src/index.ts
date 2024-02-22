@@ -17,7 +17,6 @@ export = {
                 'unicorn',
                 'simple-import-sort',
                 'sonarjs',
-                'jest',
                 'unused-imports',
                 'prefer-arrow',
                 'jsx-a11y',
