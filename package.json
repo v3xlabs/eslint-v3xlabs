@@ -10,6 +10,9 @@
             "require": "./lib/index.js"
         }
     },
+    "files": [
+        "lib"
+    ],
     "repository": {
         "type": "git",
         "url": "git+https://github.com/v3xlabs/eslint-v3xlabs.git"
@@ -38,7 +41,6 @@
     },
     "scripts": {
         "build": "tsc",
-        "pub": "pnpm build && pnpm publish --access public",
         "lint": "eslint ./src"
     },
     "version": "0.0.2"
