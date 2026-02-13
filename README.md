@@ -1,96 +1,79 @@
-# Javascript Style Guide
+# v3xlabs ESLint Presets
 
-The Official [v3xlabs](https://github.com/v3xlabs) javascript/typescript style-guide and linting rules.
+The official [v3xlabs](https://github.com/v3xlabs) JavaScript and TypeScript lint presets.
 
-## Create command
+This package targets **ESLint v9 flat config only**.
 
-The v3xlabs styleguide comes with a helpful `create` command that will help you setup your project with the style guide.
+## Quick setup
 
-The create utility tries to detect which nodejs package manager you are using but if it fails to do such it will prompt you to choose between `npm, pnpm and yarn`.
+### Create command
 
-If you have not setup a project yet in your working folder, it will provide you the option to initialize a new project. This creates a `package.json` file in your working folder and proceeds to install the style guide dependencies. (`eslint`, `eslint-plugin-v3xlabs`, `typescript`, `@typescript-eslint/parser`).
+The `create-eslint-v3xlabs` utility sets up linting in an existing or new project.
 
-When done you should also find a `.eslintrc.json` file and a `.prettierrc` file in your working folder following our style guide.
+It will:
 
-### Bun
+- detect your package manager
+- install required dev dependencies
+- generate `eslint.config.mjs`
+- generate or update `.prettierrc`
+- add a `lint` script
+
+Use one of:
+
 ```sh
 bun create eslint-v3xlabs
-```
-
-### PNPM
-```sh
 pnpm create eslint-v3xlabs
-```
-
-### Yarn
-```sh
 yarn create eslint-v3xlabs
-```
-
-### NPM
-```sh
 npm create eslint-v3xlabs
 ```
 
 ## Installation
 
-Using `npm`:
-
 ```sh
-npm install --save-dev eslint eslint-plugin-v3xlabs
+pnpm add -D eslint eslint-plugin-v3xlabs
 ```
 
-or if you prefer to use the `yarn` package manager:
+## Usage (ESLint v9)
 
-```sh
-yarn add -D eslint eslint-plugin-v3xlabs
+Create `eslint.config.mjs`:
+
+```js
+import v3xlabs from 'eslint-plugin-v3xlabs';
+
+export default [...v3xlabs.configs['flat/recommended']];
 ```
 
-## Usage
+Recommended `package.json` script:
 
-Recommended `.eslintrc.json`:
 ```json
 {
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaVersion": 2021
-    },
-    "extends": [
-        "plugin:v3xlabs/recommended"
-    ],
-    "ignorePatterns": ["!**/*"],
-    "plugins": ["v3xlabs"],
-    "env": {
-        "node": true
-    },
-    "rules": {}
+    "scripts": {
+        "lint": "eslint ."
+    }
 }
 ```
 
-The linting command you probably want to use. (Add this to your scripts section)
-```
-"lint": "eslint -c .eslintrc.json --ext .ts ./src"
-```
-Or if your project also has tests
-```
-"lint": "eslint -c .eslintrc.json --ext .ts ./src ./tests"
-```
+## Opinionated defaults
 
-You might also have to install `@typescript-eslint/parser`, and probably `typescript`.
+The preset is intentionally strict and formatting-heavy. It enforces:
 
-In addition to the above a `.prettierrc` file is also recommended with the following contents.
-```json
-{
-    "tabWidth": 4,
-    "useTabs": false,
-    "singleQuote": true
-}
-```
+- import sorting
+- unused import removal
+- descriptive identifiers (discourages generic `id`)
+- structured empty lines and line breaks
+- modern JavaScript and TypeScript rules
+- quality gates with SonarJS and Unicorn
 
-## Contributors
+## AI skill package
 
-[![](https://contrib.rocks/image?repo=lvkdotsh/javascript)](https://github.com/lvkdotsh/javascript/graphs/contributors)
+An installable agent skill for this preset lives at `skills/v3xlabs-eslint/SKILL.md`.
 
-## LICENSE
+It captures:
 
-This package is licensed under the [MIT](https://opensource.org/licenses/MIT).
+- ESLint v9 setup flow
+- v3xlabs architecture and TypeScript conventions
+- naming and formatting expectations for aggressive linting environments
+
+## License
+
+MIT.

@@ -1,31 +1,42 @@
 {
     "name": "eslint-plugin-v3xlabs",
+    "packageManager": "pnpm@10.6.3",
     "main": "lib/index.js",
+    "type": "module",
+    "exports": {
+        ".": {
+            "import": "./lib/index.js",
+            "types": "./lib/index.d.ts",
+            "require": "./lib/index.js"
+        }
+    },
     "repository": "https://github.com/v3xlabs/eslint-v3xlabs",
     "author": "Lucemans <luc@lucemans.nl>",
     "license": "MIT",
     "devDependencies": {
-        "@types/node": "^20.11.20",
-        "eslint": "^8.56.0",
-        "eslint-plugin-v3xlabs": "^1.6.2",
-        "typescript": "^5.3.3"
+        "@types/node": "^22.13.10",
+        "eslint": "^9.21.0",
+        "typescript": "^5.8.2"
     },
     "dependencies": {
-        "@typescript-eslint/parser": "^5.62.0",
-        "eslint-config-prettier": "^8.10.0",
-        "eslint-plugin-jsx-a11y": "^6.8.0",
-        "eslint-plugin-prefer-arrow": "^1.2.3",
-        "eslint-plugin-prettier": "^4.2.1",
-        "eslint-plugin-simple-import-sort": "^7.0.0",
-        "eslint-plugin-sonarjs": "^0.11.0",
-        "eslint-plugin-unicorn": "^41.0.1",
-        "eslint-plugin-unused-imports": "^2.0.0",
-        "prettier": "^2.8.8"
+        "@eslint/js": "^9.21.0",
+        "@stylistic/eslint-plugin": "^3.1.0",
+        "@typescript-eslint/eslint-plugin": "^8.25.0",
+        "@typescript-eslint/parser": "^8.25.0",
+        "eslint-config-prettier": "^10.0.1",
+        "eslint-plugin-import": "^2.31.0",
+        "eslint-plugin-prettier": "^5.2.3",
+        "eslint-plugin-simple-import-sort": "^12.1.1",
+        "eslint-plugin-sonarjs": "^3.0.2",
+        "eslint-plugin-unicorn": "^57.0.0",
+        "eslint-plugin-unused-imports": "^4.1.4",
+        "prettier": "^3.5.3",
+        "typescript-eslint": "^8.25.0"
     },
     "scripts": {
         "build": "tsc",
-        "pub": "yarn build && yarn publish --access public",
-        "lint": "eslint -c .eslintrc.json --ext .ts ./src"
+        "pub": "pnpm build && pnpm publish --access public",
+        "lint": "eslint ./src"
     },
     "version": "0.0.2"
 }

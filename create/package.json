@@ -14,16 +14,16 @@
     ],
     "scripts": {
         "build": "tsc",
-        "pub": "yarn build && yarn publish --access public",
-        "lint": "eslint -c ../.eslintrc.json --ext .ts ./src"
+        "pub": "pnpm build && pnpm publish --access public",
+        "lint": "eslint ./src"
     },
     "devDependencies": {
-        "@types/node": "^17.0.23",
+        "@types/node": "^22.13.10",
         "@types/prompts": "^2.0.14",
-        "eslint": "^8.11.0",
-        "eslint-plugin-v3xlabs": "^1.2.3",
+        "eslint": "^9.21.0",
+        "eslint-plugin-v3xlabs": "workspace:*",
         "ts-node": "^10.4.0",
-        "typescript": "^4.5.5"
+        "typescript": "^5.8.2"
     },
     "dependencies": {
         "@antfu/ni": "^0.21.8",

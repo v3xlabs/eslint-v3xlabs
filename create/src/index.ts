@@ -1,24 +1,16 @@
-/* eslint-disable sonarjs/cognitive-complexity */
-import { detect, getCommand, getDefaultAgent } from '@antfu/ni';
-import { createLogger } from '@lvksh/logger';
-import chalk from 'chalk';
 import { exec, spawn } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { readFile, stat, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
+
+import { detect, getCommand, getDefaultAgent } from '@antfu/ni';
+import { createLogger } from '@lvksh/logger';
+import chalk from 'chalk';
 import prompts from 'prompts';
 
 const Agents = ['npm', 'pnpm', 'yarn', 'bun', 'yarn@berry'] as const;
-
-type ESLintMock = {
-    parser?: string;
-    parserOptions?: { ecmaVersion?: number };
-    extends?: string[];
-    ignorePatterns?: string[];
-    plugins?: string[];
-    env?: { node: boolean };
-    rules?: {};
-};
+const ESLINT_CONFIG_FILE = 'eslint.config.mjs';
+const PRETTIER_FILE = '.prettierrc';
 
 type PrettierMock = {
     tabWidth?: number;
@@ -43,7 +35,7 @@ const log = createLogger(
         newLine: '  ',
         newLineEnd: '  ',
         padding: 'NONE',
-    }
+    },
 );
 
 const noPackage = () => {
@@ -62,60 +54,42 @@ const findPackageJson = async (path: string) => {
     return findPackageJson(join(path, '..'));
 };
 
-const setupESLintRC = async () => {
-    let mock: ESLintMock = {};
-
-    const exists = await stat('.eslintrc.json').catch(() => false);
+const setupESLintConfig = async () => {
+    const exists = await stat(ESLINT_CONFIG_FILE).catch(() => false);
 
     if (exists) {
         log.empty(
-            `Found existing ${chalk.gray('.eslintrc.json')}, modifying...`
+            `Found existing ${chalk.gray(ESLINT_CONFIG_FILE)}, skipping...`,
         );
 
-        const oldFile = await readFile('.eslintrc.json');
-
-        mock = JSON.parse(oldFile.toString()) as ESLintMock;
-    } else {
-        log.empty('Generating ' + chalk.gray`.eslintrc.json`);
+        return;
     }
 
-    const updatedLint: ESLintMock = {
-        ...mock,
-        parser: '@typescript-eslint/parser',
-        parserOptions: { ecmaVersion: 2021 },
-        extends: [
-            ...new Set([...(mock.extends || []), 'plugin:v3xlabs/recommended']),
-        ],
-        ignorePatterns: ['!**/*'],
-        plugins: [...new Set([...(mock.plugins || []), 'v3xlabs'])],
-        env: {
-            node: true,
-        },
-        rules: {
-            ...(mock.rules || []),
-        },
-    };
+    log.empty('Generating ' + chalk.gray`${ESLINT_CONFIG_FILE}`);
 
-    // Write the updated/new file to disk
-    await writeFile(
-        '.eslintrc.json',
-        JSON.stringify(updatedLint, undefined, 4)
-    );
+    const config = `import v3xlabs from 'eslint-plugin-v3xlabs';
+
+export default [
+    ...v3xlabs.configs['flat/recommended'],
+];
+`;
+
+    await writeFile(ESLINT_CONFIG_FILE, config);
 };
 
 const setupPrettier = async () => {
     let mock: PrettierMock = {};
 
-    const exists = await stat('.prettierrc').catch(() => false);
+    const exists = await stat(PRETTIER_FILE).catch(() => false);
 
     if (exists) {
-        log.empty(`Found existing ${chalk.gray('.prettierrc')}, modifying...`);
+        log.empty(`Found existing ${chalk.gray(PRETTIER_FILE)}, modifying...`);
 
-        const oldFile = await readFile('.prettierrc');
+        const oldFile = await readFile(PRETTIER_FILE);
 
         mock = JSON.parse(oldFile.toString()) as PrettierMock;
     } else {
-        log.empty('Generating ' + chalk.gray`.prettierrc`);
+        log.empty('Generating ' + chalk.gray`${PRETTIER_FILE}`);
     }
 
     const BestData: PrettierMock = {
@@ -126,7 +100,7 @@ const setupPrettier = async () => {
     };
 
     // Write the updated/new file to disk
-    await writeFile('.prettierrc', JSON.stringify(BestData, undefined, 4));
+    await writeFile(PRETTIER_FILE, JSON.stringify(BestData, undefined, 4));
 };
 
 const setupPackageJSON = async (path: string) => {
@@ -135,7 +109,7 @@ const setupPackageJSON = async (path: string) => {
             chalk.yellow`Skipped` +
                 ' Setting up ' +
                 chalk.gray`lint` +
-                ' script.'
+                ' script.',
         );
 
         return;
@@ -144,14 +118,14 @@ const setupPackageJSON = async (path: string) => {
     log.empty('Setting up ' + chalk.gray`lint` + ' script...');
     const rawPackageData = await readFile(path);
     const packageData: { scripts?: { [key: string]: string } } = JSON.parse(
-        rawPackageData.toString()
+        rawPackageData.toString(),
     );
 
     const updatedPackageData = {
         ...packageData,
         scripts: {
             ...packageData.scripts,
-            lint: 'eslint -c .eslintrc.json --ext .ts ./src',
+            lint: 'eslint .',
         },
     };
 
@@ -166,7 +140,7 @@ const setupPackageJSON = async (path: string) => {
     log.empty(
         'Authored by ' + chalk.gray`@v3xlabs`,
         'github.com/v3xlabs/eslint-v3xlabs',
-        ''
+        '',
     );
 
     await new Promise<void>((reply) => setTimeout(reply, 1000));
@@ -185,7 +159,7 @@ const setupPackageJSON = async (path: string) => {
                 type: 'select',
                 message: 'Choose the agent',
                 choices: Agents.filter((index) => !index.includes('@')).map(
-                    (value) => ({ title: value, value })
+                    (value) => ({ title: value, value }),
                 ),
             })
         ).agent;
@@ -206,7 +180,7 @@ const setupPackageJSON = async (path: string) => {
     log.empty(
         packageJSONLocation
             ? 'Looks good 👍'
-            : 'Could not find project files 👀'
+            : 'Could not find project files 👀',
     );
 
     if (!packageJSONLocation) {
@@ -222,13 +196,13 @@ const setupPackageJSON = async (path: string) => {
         if (shouldInit) {
             log.empty('Launching ' + global + ' to initialize project');
             log.empty('');
-            await new Promise<void>((accept, reject) => {
+            await new Promise<void>((accept, _reject) => {
                 const shell = spawn(global, ['init'], { stdio: 'inherit' });
 
                 shell.on('error', (e) => {
                     console.log(e);
                 });
-                shell.on('close', (code) => {
+                shell.on('close', (_code) => {
                     accept();
                 });
             });
@@ -250,7 +224,7 @@ const setupPackageJSON = async (path: string) => {
         'eslint',
         'eslint-plugin-v3xlabs',
         'typescript',
-        '@typescript-eslint/parser',
+        'typescript-eslint',
     ];
 
     for (const packageToInstall of packages) {
@@ -277,7 +251,7 @@ const setupPackageJSON = async (path: string) => {
     log['⚙️']('Configuring...');
     log.empty(chalk.yellowBright('-'.repeat(40)));
 
-    await setupESLintRC();
+    await setupESLintConfig();
     await setupPrettier();
     await setupPackageJSON(packageJSONLocation);
 

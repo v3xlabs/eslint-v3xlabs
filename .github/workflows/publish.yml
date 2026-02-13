@@ -1,33 +1,32 @@
 name: Node.js Package
 on:
-  release:
-    types: [created]
+    release:
+        types: [created]
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14.x'
-          registry-url: 'https://registry.npmjs.org'
-      - run: yarn
-      - name: Build
-        run: yarn build
-      - name: Version
-        run: yarn version --new-version "${GITHUB_REF:11}" --no-git-tag-version
-      - run: yarn pub
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: yarn
-        working-directory: ./create
-      - name: Build
-        run: yarn build
-        working-directory: ./create
-      - name: Version
-        run: yarn version --new-version "${GITHUB_REF:11}" --no-git-tag-version
-        working-directory: ./create
-      - run: yarn pub
-        working-directory: ./create
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    build:
+        permissions:
+            contents: read
+            id-token: write
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: pnpm/action-setup@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: '20'
+                  registry-url: 'https://registry.npmjs.org'
+                  cache: 'pnpm'
+            - run: pnpm install --frozen-lockfile
+            - name: Build
+              run: pnpm -r build
+            - name: Version
+              run: npm version "${GITHUB_REF:11}" --no-git-tag-version
+            - run: npm publish --provenance --access public
+
+            - run: pnpm install --frozen-lockfile
+              working-directory: ./create
+            - name: Version
+              run: npm version "${GITHUB_REF:11}" --no-git-tag-version
+              working-directory: ./create
+            - run: npm publish --provenance --access public
+              working-directory: ./create
