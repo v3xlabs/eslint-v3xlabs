@@ -120,6 +120,9 @@ const flatRecommended = [
     },
     {
         files: ['**/vitest.config.ts', '**/wxt.config.ts'],
+        plugins: {
+            import: pluginImport,
+        },
         rules: {
             'import/no-default-export': 'off',
         },
