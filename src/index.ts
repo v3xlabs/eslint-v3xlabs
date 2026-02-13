@@ -114,6 +114,7 @@ const tsOther: Linter.Config = {
         'unicorn/prevent-abbreviations': 'off',
         'unicorn/expiring-todo-comments': 'off',
         'unicorn/filename-case': 'off',
+        '@stylistic/quotes': ['error', 'double'],
         '@stylistic/semi': ['error', 'always'],
         '@stylistic/no-confusing-arrow': 'error',
         '@stylistic/no-multiple-empty-lines': ['error', { max: 1 }],
