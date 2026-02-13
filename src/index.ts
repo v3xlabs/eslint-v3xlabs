@@ -4,6 +4,7 @@ import type { ESLint, Linter } from 'eslint';
 import pluginImport from 'eslint-plugin-import';
 import eslintPluginReactHooks from 'eslint-plugin-react-hooks';
 import eslintPluginSimpleImportSort from 'eslint-plugin-simple-import-sort';
+import eslintPluginTailwindcss from 'eslint-plugin-tailwindcss';
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import eslintPluginUnusedImports from 'eslint-plugin-unused-imports';
 import tseslint from 'typescript-eslint';
@@ -160,14 +161,20 @@ const tsReact: Linter.Config = {
     },
     plugins: {
         'react-hooks': eslintPluginReactHooks as ESLint.Plugin,
+        tailwindcss: eslintPluginTailwindcss as ESLint.Plugin,
     },
     rules: {
         ...eslintPluginReactHooks.configs['recommended-latest'].rules,
+        ...eslintPluginTailwindcss.configs['flat/recommended'].rules,
     },
 };
 
 const plugin: ESLint.Plugin & {
-    configs: { sort: Linter.Config[]; recommended: Linter.Config[] };
+    configs: {
+        sort: Linter.Config[];
+        recommended: Linter.Config[];
+        react: Linter.Config[];
+    };
 } = {
     rules: {},
     configs: {
