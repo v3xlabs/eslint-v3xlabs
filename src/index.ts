@@ -127,6 +127,20 @@ const tsOther: Linter.Config = {
             },
         ],
         '@stylistic/semi': ['error', 'always'],
+        '@stylistic/no-multiple-empty-lines': ['error', { max: 1 }],
+        '@stylistic/member-delimiter-style': [
+            'error',
+            {
+                multiline: {
+                    delimiter: 'semi',
+                    requireLast: true,
+                },
+                singleline: {
+                    delimiter: 'semi',
+                    requireLast: true,
+                },
+            },
+        ],
     },
 };
 
@@ -137,9 +151,9 @@ const plugin: ESLint.Plugin & {
     configs: {
         sort: [sortVitest, tsImportSort],
         recommended: [
+            ...tsJsEs,
             sortVitest,
             tsImportSort,
-            ...tsJsEs,
             tsStylistic,
             tsOther,
         ],
