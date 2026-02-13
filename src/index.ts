@@ -89,8 +89,9 @@ const tsOther: Linter.Config = {
         semi: ['error', 'always'],
         'no-var': 'error',
         'prefer-const': 'error',
-        'prefer-destructuring': 'warn',
-        'prefer-arrow-callback': 'warn',
+        'func-style': ['error', 'expression'],
+        'prefer-arrow-callback': ['error'],
+        'arrow-body-style': ['error', 'as-needed'],
         'linebreak-style': ['error', 'unix'],
         'object-curly-spacing': ['error', 'always'],
         'no-multiple-empty-lines': ['warn', { max: 2 }],
@@ -108,6 +109,10 @@ const tsOther: Linter.Config = {
         'unicorn/prevent-abbreviations': 'off',
         'unicorn/expiring-todo-comments': 'off',
         'unicorn/filename-case': 'off',
+        '@stylistic/semi': ['error', 'always'],
+        '@stylistic/no-confusing-arrow': 'error',
+        '@stylistic/no-multiple-empty-lines': ['error', { max: 1 }],
+        '@stylistic/newline-per-chained-call': 'error',
         '@stylistic/padding-line-between-statements': [
             'error',
             {
@@ -126,8 +131,6 @@ const tsOther: Linter.Config = {
                 next: ['const', 'let'],
             },
         ],
-        '@stylistic/semi': ['error', 'always'],
-        '@stylistic/no-multiple-empty-lines': ['error', { max: 1 }],
         '@stylistic/member-delimiter-style': [
             'error',
             {
