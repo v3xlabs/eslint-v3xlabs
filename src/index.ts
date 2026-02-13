@@ -1,9 +1,11 @@
+import eslint from '@eslint/js';
 import stylistic from '@stylistic/eslint-plugin';
 import type { ESLint, Linter } from 'eslint';
 import pluginImport from 'eslint-plugin-import';
 import eslintPluginSimpleImportSort from 'eslint-plugin-simple-import-sort';
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import eslintPluginUnusedImports from 'eslint-plugin-unused-imports';
+import tseslint from 'typescript-eslint';
 
 const sortVitest: Linter.Config = {
     files: ['**/vitest.config.ts', '**/wxt.config.ts'],
@@ -42,6 +44,13 @@ const tsImportSort: Linter.Config = {
 };
 
 const tsStylistic: Linter.Config = stylistic.configs['recommended-flat'];
+
+const tsJsEs: Linter.Config[] = [
+    {
+        rules: eslint.configs.recommended.rules,
+    },
+    ...tseslint.configs.recommended,
+];
 
 const tsOther: Linter.Config = {
     files: ['**/*.{js,mjs,cjs,jsx,ts,tsx}'],
@@ -117,6 +126,7 @@ const tsOther: Linter.Config = {
                 next: ['const', 'let'],
             },
         ],
+        '@stylistic/semi': ['error', 'always'],
     },
 };
 
@@ -126,7 +136,13 @@ const plugin: ESLint.Plugin & {
     rules: {},
     configs: {
         sort: [sortVitest, tsImportSort],
-        recommended: [sortVitest, tsImportSort, tsStylistic, tsOther],
+        recommended: [
+            sortVitest,
+            tsImportSort,
+            ...tsJsEs,
+            tsStylistic,
+            tsOther,
+        ],
     },
 };
 
