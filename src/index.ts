@@ -8,14 +8,19 @@ import eslintPluginUnusedImports from 'eslint-plugin-unused-imports';
 import tseslint from 'typescript-eslint';
 
 const sortVitest: Linter.Config = {
-    files: ['**/vitest.config.ts', '**/wxt.config.ts'],
+    files: [
+        '**/vitest.config.{js,ts,mts}',
+        '**/wxt.config.{js,ts,mts}',
+        '**/vite.config.{js,ts,mts}',
+    ],
     rules: {
         'import/no-default-export': 'off',
     },
 };
 
 const tsImportSort: Linter.Config = {
-    files: ['**/*.{js,mjs,cjs,jsx,ts,tsx}'],
+    ignores: ['**/dist/**', '**/out/**', '**/node_modules/**'],
+    files: ['**/*.{js,mjs,cjs,jsx,ts,tsx,mts}'],
     plugins: {
         import: pluginImport,
         'simple-import-sort': eslintPluginSimpleImportSort,
@@ -53,7 +58,7 @@ const tsJsEs: Linter.Config[] = [
 ];
 
 const tsOther: Linter.Config = {
-    files: ['**/*.{js,mjs,cjs,jsx,ts,tsx}'],
+    files: ['**/*.{js,mjs,cjs,jsx,ts,tsx,mts}'],
     plugins: {
         unicorn: eslintPluginUnicorn,
     },
@@ -85,7 +90,7 @@ const tsOther: Linter.Config = {
                 argsIgnorePattern: '^_',
             },
         ],
-        quotes: ['error', 'single'],
+        quotes: ['error', 'double'],
         semi: ['error', 'always'],
         'no-var': 'error',
         'prefer-const': 'error',

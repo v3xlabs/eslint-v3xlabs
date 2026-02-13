@@ -31,12 +31,10 @@
         "@typescript-eslint/eslint-plugin": "^8",
         "@typescript-eslint/parser": "^8",
         "eslint-plugin-import": "^2",
-        "eslint-plugin-prettier": "^5",
         "eslint-plugin-simple-import-sort": "^12",
         "eslint-plugin-sonarjs": "^3",
         "eslint-plugin-unicorn": "^57",
         "eslint-plugin-unused-imports": "^4",
-        "prettier": "^3",
         "typescript-eslint": "^8.55.0"
     },
     "scripts": {
