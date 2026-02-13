@@ -9,43 +9,43 @@ importers:
   .:
     dependencies:
       '@eslint/js':
-        specifier: ^9.21.0
+        specifier: '9'
         version: 9.39.2
       '@stylistic/eslint-plugin':
-        specifier: ^3.1.0
+        specifier: '3'
         version: 3.1.0(eslint@9.39.2)(typescript@5.9.3)
       '@typescript-eslint/eslint-plugin':
-        specifier: ^8.25.0
+        specifier: '8'
         version: 8.55.0(@typescript-eslint/parser@8.55.0(eslint@9.39.2)(typescript@5.9.3))(eslint@9.39.2)(typescript@5.9.3)
       '@typescript-eslint/parser':
-        specifier: ^8.25.0
+        specifier: '8'
         version: 8.55.0(eslint@9.39.2)(typescript@5.9.3)
       eslint-config-prettier:
-        specifier: ^10.0.1
+        specifier: '10'
         version: 10.1.8(eslint@9.39.2)
       eslint-plugin-import:
-        specifier: ^2.31.0
+        specifier: '2'
         version: 2.32.0(@typescript-eslint/parser@8.55.0(eslint@9.39.2)(typescript@5.9.3))(eslint@9.39.2)
       eslint-plugin-prettier:
-        specifier: ^5.2.3
+        specifier: '5'
         version: 5.5.5(eslint-config-prettier@10.1.8(eslint@9.39.2))(eslint@9.39.2)(prettier@3.8.1)
       eslint-plugin-simple-import-sort:
-        specifier: ^12.1.1
+        specifier: '12'
         version: 12.1.1(eslint@9.39.2)
       eslint-plugin-sonarjs:
-        specifier: ^3.0.2
+        specifier: '3'
         version: 3.0.7(eslint@9.39.2)
       eslint-plugin-unicorn:
-        specifier: ^57.0.0
+        specifier: '57'
         version: 57.0.0(eslint@9.39.2)
       eslint-plugin-unused-imports:
-        specifier: ^4.1.4
+        specifier: '4'
         version: 4.4.1(@typescript-eslint/eslint-plugin@8.55.0(@typescript-eslint/parser@8.55.0(eslint@9.39.2)(typescript@5.9.3))(eslint@9.39.2)(typescript@5.9.3))(eslint@9.39.2)
       prettier:
-        specifier: ^3.5.3
+        specifier: '3'
         version: 3.8.1
       typescript-eslint:
-        specifier: ^8.25.0
+        specifier: '8'
         version: 8.55.0(eslint@9.39.2)(typescript@5.9.3)
     devDependencies:
       '@types/node':

@@ -1,5 +1,6 @@
 import eslintJs from '@eslint/js';
 import stylistic from '@stylistic/eslint-plugin';
+import type { ESLint, Linter } from 'eslint';
 import pluginImport from 'eslint-plugin-import';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import eslintPluginSimpleImportSort from 'eslint-plugin-simple-import-sort';
@@ -128,8 +129,14 @@ const flatRecommended = [
 const plugin = {
     rules: {},
     configs: {
-        'flat/recommended': flatRecommended,
+        recommended: flatRecommended,
+        all: flatRecommended,
     },
+} as ESLint.Plugin & {
+    configs: {
+        recommended: Linter.Config;
+        all: Linter.Config;
+    };
 };
 
 export default plugin;
