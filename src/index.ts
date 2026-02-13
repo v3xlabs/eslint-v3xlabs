@@ -120,7 +120,9 @@ const tsOther: Linter.Config = {
     },
 };
 
-const plugin: ESLint.Plugin = {
+const plugin: ESLint.Plugin & {
+    configs: { sort: Linter.Config[]; recommended: Linter.Config[] };
+} = {
     rules: {},
     configs: {
         sort: [sortVitest, tsImportSort],
