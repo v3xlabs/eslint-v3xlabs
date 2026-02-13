@@ -23,4 +23,4 @@ jobs:
               run: pnpm -r build
             - name: Version
               run: pnpm version "${GITHUB_REF:11}" --no-git-tag-version
-            - run: pnpm publish
+            - run: pnpm publish --no-git-checks
