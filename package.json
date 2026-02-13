@@ -10,7 +10,10 @@
             "require": "./lib/index.js"
         }
     },
-    "repository": "https://github.com/v3xlabs/eslint-v3xlabs",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/v3xlabs/eslint-v3xlabs.git"
+    },
     "author": "Lucemans <luc@lucemans.nl>",
     "license": "MIT",
     "devDependencies": {
