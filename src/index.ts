@@ -2,6 +2,7 @@ import eslint from '@eslint/js';
 import stylistic from '@stylistic/eslint-plugin';
 import type { ESLint, Linter } from 'eslint';
 import pluginImport from 'eslint-plugin-import';
+import eslintPluginReactHooks from 'eslint-plugin-react-hooks';
 import eslintPluginSimpleImportSort from 'eslint-plugin-simple-import-sort';
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import eslintPluginUnusedImports from 'eslint-plugin-unused-imports';
@@ -151,6 +152,20 @@ const tsOther: Linter.Config = {
     },
 };
 
+const tsReact: Linter.Config = {
+    files: ['**/*.{js,mjs,cjs,jsx,ts,tsx,mts}'],
+    languageOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+    },
+    plugins: {
+        'react-hooks': eslintPluginReactHooks as ESLint.Plugin,
+    },
+    rules: {
+        ...eslintPluginReactHooks.configs['recommended-latest'].rules,
+    },
+};
+
 const plugin: ESLint.Plugin & {
     configs: { sort: Linter.Config[]; recommended: Linter.Config[] };
 } = {
@@ -164,6 +179,7 @@ const plugin: ESLint.Plugin & {
             sortVitest,
             tsOther,
         ],
+        react: [tsReact],
     },
 };
 
