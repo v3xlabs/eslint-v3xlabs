@@ -9,6 +9,7 @@ import eslintPluginUnicorn from "eslint-plugin-unicorn";
 import eslintPluginUnusedImports from "eslint-plugin-unused-imports";
 import tseslint from "typescript-eslint";
 
+import { noLlmFingerprint } from "./rules/no-llm-fingerprint.js";
 import { noTemplateLiteralClassnames } from "./rules/no-template-literal-classnames.js";
 
 const sortVitest: Linter.Config = {
@@ -213,6 +214,7 @@ const plugin: ESLint.Plugin & {
   };
 } = {
   rules: {
+    "no-llm-fingerprint": noLlmFingerprint,
     "no-template-literal-classnames": noTemplateLiteralClassnames,
   },
   configs: {
@@ -221,6 +223,16 @@ const plugin: ESLint.Plugin & {
     react: [],
     solid: [],
     tailwindcss: [],
+  },
+};
+
+const tsLlmFingerprint: Linter.Config = {
+  files: ["**/*.{js,mjs,cjs,jsx,ts,tsx,mts}"],
+  plugins: {
+    v3xlabs: plugin,
+  },
+  rules: {
+    "v3xlabs/no-llm-fingerprint": "error",
   },
 };
 
@@ -241,6 +253,7 @@ plugin.configs.recommended = [
   tsImportSort,
   sortVitest,
   tsOther,
+  tsLlmFingerprint,
 ];
 plugin.configs.react = [tsReact, tsClassnames];
 plugin.configs.solid = [tsSolid, tsClassnames];
