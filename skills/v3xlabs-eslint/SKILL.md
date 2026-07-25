@@ -1,6 +1,6 @@
 ---
 name: v3xlabs-eslint
-description: Apply v3xlabs JavaScript and TypeScript code structure, naming, and ESLint v9 style guidance.
+description: Apply v3xlabs JavaScript and TypeScript code structure, naming, and ESLint v10 style guidance.
 metadata:
     tags: javascript, typescript, eslint, style, architecture, linting
 ---
@@ -12,7 +12,7 @@ Use this skill when working on JavaScript or TypeScript repositories that should
 ## When to use
 
 - Adding or updating ESLint config in JS/TS projects
-- Standardizing on ESLint v9 flat config across repositories
+- Standardizing on ESLint v10 flat config across repositories
 - Refactoring code to match v3xlabs style and naming
 - Reviewing pull requests for structural and lint-rule alignment
 
@@ -29,7 +29,7 @@ Use this skill when working on JavaScript or TypeScript repositories that should
 - Use `camelCase` for variables/functions and `PascalCase` for types/components
 - Keep event names in snake_case when compatibility requires it (`state_change`, `settings_change`)
 
-## ESLint setup (v9)
+## ESLint setup (v10)
 
 Install:
 

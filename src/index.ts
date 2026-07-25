@@ -1,13 +1,15 @@
 import eslint from "@eslint/js";
 import stylistic from "@stylistic/eslint-plugin";
 import type { ESLint, Linter } from "eslint";
-import pluginImport from "eslint-plugin-import";
+import pluginImport from "eslint-plugin-import-x";
 import eslintPluginReactHooks from "eslint-plugin-react-hooks";
 import eslintPluginSimpleImportSort from "eslint-plugin-simple-import-sort";
 import eslintPluginTailwindcss from "eslint-plugin-tailwindcss";
 import eslintPluginUnicorn from "eslint-plugin-unicorn";
 import eslintPluginUnusedImports from "eslint-plugin-unused-imports";
 import tseslint from "typescript-eslint";
+
+import { noTemplateLiteralClassnames } from "./rules/no-template-literal-classnames.js";
 
 const sortVitest: Linter.Config = {
   files: [
@@ -50,7 +52,7 @@ const tsImportSort: Linter.Config = {
   },
 };
 
-const tsStylistic: Linter.Config = stylistic.configs["recommended-flat"];
+const tsStylistic: Linter.Config = stylistic.configs["recommended"];
 
 const tsJsEs: Linter.Config[] = [
   {
@@ -167,13 +169,37 @@ const tsReact: Linter.Config = {
   },
 };
 
+const tailwindRecommended = eslintPluginTailwindcss.configs[
+  "recommended"
+] as unknown as Linter.Config;
+
 const tsTailwindcss: Linter.Config = {
   files: ["**/*.{js,mjs,cjs,jsx,ts,tsx,mts}"],
   plugins: {
-    tailwindcss: eslintPluginTailwindcss as ESLint.Plugin,
+    tailwindcss: eslintPluginTailwindcss as unknown as ESLint.Plugin,
   },
   rules: {
-    ...eslintPluginTailwindcss.configs["flat/recommended"].rules,
+    ...tailwindRecommended.rules,
+  },
+};
+
+const tsSolid: Linter.Config = {
+  files: ["**/*.{js,mjs,cjs,jsx,ts,tsx,mts}"],
+  languageOptions: {
+    ecmaVersion: "latest",
+    sourceType: "module",
+  },
+  plugins: {
+    "unicorn": eslintPluginUnicorn,
+    "@stylistic": stylistic,
+  },
+  rules: {
+    "unicorn/no-useless-undefined": "off",
+    "unicorn/no-null": "off",
+    "@stylistic/jsx-max-props-per-line": [
+      "error",
+      { maximum: { single: 3, multi: 1 } },
+    ],
   },
 };
 
@@ -182,22 +208,43 @@ const plugin: ESLint.Plugin & {
     sort: Linter.Config[];
     recommended: Linter.Config[];
     react: Linter.Config[];
+    solid: Linter.Config[];
     tailwindcss: Linter.Config[];
   };
 } = {
-  rules: {},
+  rules: {
+    "no-template-literal-classnames": noTemplateLiteralClassnames,
+  },
   configs: {
-    sort: [sortVitest, tsImportSort],
-    recommended: [
-      ...tsJsEs,
-      tsStylistic,
-      tsImportSort,
-      sortVitest,
-      tsOther,
-    ],
-    react: [tsReact],
-    tailwindcss: [tsTailwindcss],
+    sort: [],
+    recommended: [],
+    react: [],
+    solid: [],
+    tailwindcss: [],
   },
 };
 
+const tsClassnames: Linter.Config = {
+  files: ["**/*.{js,mjs,cjs,jsx,ts,tsx,mts}"],
+  plugins: {
+    v3xlabs: plugin,
+  },
+  rules: {
+    "v3xlabs/no-template-literal-classnames": "error",
+  },
+};
+
+plugin.configs.sort = [sortVitest, tsImportSort];
+plugin.configs.recommended = [
+  ...tsJsEs,
+  tsStylistic,
+  tsImportSort,
+  sortVitest,
+  tsOther,
+];
+plugin.configs.react = [tsReact, tsClassnames];
+plugin.configs.solid = [tsSolid, tsClassnames];
+plugin.configs.tailwindcss = [tsTailwindcss, tsClassnames];
+
+// eslint-disable-next-line import/no-default-export -- an ESLint plugin's entry is consumed as a default import
 export default plugin;

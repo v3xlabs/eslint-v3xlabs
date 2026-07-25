@@ -2,7 +2,7 @@
 
 The official [v3xlabs](https://github.com/v3xlabs) JavaScript and TypeScript lint presets.
 
-This package targets **ESLint v9 flat config only**.
+This package targets **ESLint v10 flat config only**. To use these rules you must be on the latest ESLint (v10) or newer.
 
 ## Quick setup
 
@@ -33,7 +33,7 @@ npm create eslint-v3xlabs
 pnpm add -D eslint eslint-plugin-v3xlabs
 ```
 
-## Usage (ESLint v9)
+## Usage (ESLint v10)
 
 Create `eslint.config.mjs`:
 
@@ -70,7 +70,7 @@ An installable agent skill for this preset lives at `skills/v3xlabs-eslint/SKILL
 
 It captures:
 
-- ESLint v9 setup flow
+- ESLint v10 setup flow
 - v3xlabs architecture and TypeScript conventions
 - naming and formatting expectations for aggressive linting environments
 
