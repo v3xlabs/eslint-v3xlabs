@@ -45,6 +45,5 @@
     "scripts": {
         "build": "tsc",
         "lint": "eslint ./src"
-    },
-    "version": "1.8.1"
+    }
 }
